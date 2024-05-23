@@ -30,6 +30,26 @@ app.get('/api/personas', (request, response) => {
     response.json(personas)
 })
 
+app.get('/api/info', (request, response) => {
+
+     let dateInfo = new Date();
+     console.log(dateInfo)
+    response.send(
+        '<p>Phonebooh has info for '+ personas.length + ' people</p><p>'+ dateInfo + '</p>'
+    )
+})
+
+
+app.get('/api/persons/:id', (request, response) => {
+    const id = Number(request.params.id)
+    const persona = personas.find(persona => persona.id === id)
+
+    if (persona) {
+        response.json(persona)
+      } else {
+        response.status(404).end()
+      }
+  })
 
 const PORT = 3001
 app.listen(PORT)
