@@ -39,6 +39,15 @@ app.get('/api/info', (request, response) => {
     )
 })
 
+app.get('/api/info', (request, response) => {
+
+     let dateInfo = new Date();
+     console.log(dateInfo)
+    response.send(
+        '<p>Phonebooh has info for '+ personas.length + ' people</p><p>'+ dateInfo + '</p>'
+    )
+})
+
 
 app.get('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
