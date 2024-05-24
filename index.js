@@ -32,19 +32,19 @@ app.get('/api/personas', (request, response) => {
 
 app.get('/api/info', (request, response) => {
 
-     let dateInfo = new Date();
-     console.log(dateInfo)
+    let dateInfo = new Date();
+    console.log(dateInfo)
     response.send(
-        '<p>Phonebooh has info for '+ personas.length + ' people</p><p>'+ dateInfo + '</p>'
+        '<p>Phonebooh has info for ' + personas.length + ' people</p><p>' + dateInfo + '</p>'
     )
 })
 
 app.get('/api/info', (request, response) => {
 
-     let dateInfo = new Date();
-     console.log(dateInfo)
+    let dateInfo = new Date();
+    console.log(dateInfo)
     response.send(
-        '<p>Phonebooh has info for '+ personas.length + ' people</p><p>'+ dateInfo + '</p>'
+        '<p>Phonebooh has info for ' + personas.length + ' people</p><p>' + dateInfo + '</p>'
     )
 })
 
@@ -55,17 +55,35 @@ app.get('/api/persons/:id', (request, response) => {
 
     if (persona) {
         response.json(persona)
-      } else {
+    } else {
         response.status(404).end()
-      }
-  })
+    }
+})
 
-  app.delete('/api/persons/:id', (request, response) => {
+app.delete('/api/persons/:id', (request, response) => {
     const id = Number(request.params.id)
     personas = personas.filter(persona => persona.id !== id)
 
     response.status(204).end()
-  })
+})
+
+const generateId = () => {
+    return Math.floor(Math.random() * 9999)
+}
+app.post('/api/persons', (request, response) => {
+    const body = request.body
+
+
+    const persona = {
+        id: generateId(),
+        name: body.name,
+        number: body.number,
+    }
+
+    personas = personas.concat(persona)
+
+    response.json(persona)
+})
 
 const PORT = 3001
 app.listen(PORT)
