@@ -16,12 +16,12 @@ mongoose.set('strictQuery', false)
 
 mongoose.connect(url)
 
-const PersonSchema = new mongoose.Schema({
+const personSchema = new mongoose.Schema({
   name: String,
   number: String,
 })
 
-const Person = mongoose.model('Person', PersonSchema)
+const Person = mongoose.model('Person', personSchema)
 
 if (personName != null) {
   const person = new Person({
